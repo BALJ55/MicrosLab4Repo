@@ -28,7 +28,7 @@ using namespace cv;
 //Imagen a ser modificada
 Mat espiral(MAXSZ, MAXSZ, CV_8U);
 //Tamano de la imagen que se creara
-complex<float> mat[MAXSZ][MAXSZ];
+//float mat[MAXSZ][MAXSZ];
 
 
 int isPrime(int);
