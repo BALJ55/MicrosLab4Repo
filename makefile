@@ -1,4 +1,4 @@
-TARGET= andrea
+TARGET= spiralTest
 
 all: $(TARGET)
 
