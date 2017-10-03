@@ -111,7 +111,7 @@ int main() {
 }
 
 //funcion dada para un numero primo
-int isPrime(int &number) {
+int isPrime(int number) {
     for (unsigned int i = 2; i < number; i++) {
         if (number % i == 0) {
             return 0;
