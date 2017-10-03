@@ -89,7 +89,7 @@ int main() {
         for (c = 0; c < MAXSZ; c++) {
 
 
-			Vec3b color = image.at<Vec3b>(Point(r,c));
+			Vec3b color = espiral.at<Vec3b>(Point(r,c));
             a[r][c] = isPrime(a[r][c]);
             //set de los colores (??)
             if(a[r][c]){
