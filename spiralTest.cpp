@@ -75,7 +75,7 @@ int main() {
         for (c = 0; c < MAXSZ; c++) {
 
    Vec3b color = espiral.at<Vec3b>(Point(r,c));
-            a[r][c] = isPrime(a[r][c]);
+            a[r][c] = isPrime( a[r][c] );
             //set de los colores (??)
             if(a[r][c]){
                 espiral.at<Vec3b>(Point(r,c)) = 0;
@@ -93,12 +93,12 @@ int main() {
     return 0;
 }
 //funcion dada para un numero primo
-int isPrime(int number) {
-    for (unsigned int i = 2; i < number; i++) {
-        if (number % i == 0) {
+int isPrime(int number){
+    for (unsigned int i=2; i<number; i++){
+        if (number % i == 0){
             return 0;
         }
     }
-    //number is prime 
+    //number is prime	
     return 1;
 }
