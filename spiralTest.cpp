@@ -88,17 +88,22 @@ int main() {
     for (r = 0; r < MAXSZ; r++) {
         for (c = 0; c < MAXSZ; c++) {
 
-            color = isPrime(a[r][c]);
-            a[r][c] = color;
-            std::cout << a[r][c] << " ";
+
+			Vec3b color = image.at<Vec3b>(Point(r,c));
+            a[r][c] = isPrime(a[r][c]);
+            //set de los colores (??)
+            if(a[r][c]){
+       	        espiral.at<Vec3b>(Point(x,y)) = 255;
+			}else{
+		        espiral.at<Vec3b>(Point(x,y)) = 0;	
+			}
+         //   std::cout << a[r][c] << " ";
             uchar value = (uchar) a[r][c];
 		    espiral.ptr<uchar>(r)[c] = value;
             //printf("%4d ",a[r][c]);
         }
-        printf("\n");
-
-
     }
+    	
         imwrite("espiralPrimos.png", espiral);
 
     return 0;
