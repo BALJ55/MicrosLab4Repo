@@ -90,7 +90,8 @@ int main() {
     }
      
         imwrite("espiralPrimos.png", espiral);
-    return 0;
+    //ERROR CAMBIADO A LN94
+	return 0;
 }
 //funcion dada para un numero primo
 int isPrime(int number){
