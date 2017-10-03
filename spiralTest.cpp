@@ -9,7 +9,7 @@
 #define DOWN 2
 #define LEFT 3
 #define RIGHT 4
-#define MAXSZ 19
+#define MAXSZ 2001
 
 
 /*
@@ -31,7 +31,7 @@ Mat espiral(MAXSZ, MAXSZ, CV_8U);
 //float mat[MAXSZ][MAXSZ];
 
 
-int  isPrime(int);
+int isPrime(int);
 
 int main() {
 
