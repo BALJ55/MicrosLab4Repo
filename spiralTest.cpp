@@ -31,7 +31,7 @@ Mat espiral(MAXSZ, MAXSZ, CV_8U);
 //float mat[MAXSZ][MAXSZ];
 
 
-int isPrime(int);
+int isPrime(int n);
 
 int main() {
 
