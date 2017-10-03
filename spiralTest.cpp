@@ -93,9 +93,9 @@ int main() {
             a[r][c] = isPrime(a[r][c]);
             //set de los colores (??)
             if(a[r][c]){
-       	        espiral.at<Vec3b>(Point(x,y)) = 255;
+       	        espiral.at<Vec3b>(Point(r,c)) = 255;
 			}else{
-		        espiral.at<Vec3b>(Point(x,y)) = 0;	
+		        espiral.at<Vec3b>(Point(r,c)) = 0;	
 			}
          //   std::cout << a[r][c] << " ";
             uchar value = (uchar) a[r][c];
