@@ -31,7 +31,7 @@ Mat espiral(MAXSZ, MAXSZ, CV_8U);
 //float mat[MAXSZ][MAXSZ];
 
 
-int isPrime(&int);
+int  isPrime(int);
 
 int main() {
 
@@ -90,7 +90,7 @@ int main() {
 
 
 			Vec3b color = espiral.at<Vec3b>(Point(r,c));
-            a[r][c] = isPrime(&a[r][c]);
+            a[r][c] = isPrime(a[r][c]);
             //set de los colores (??)
             if(a[r][c]){
        	        espiral.at<Vec3b>(Point(r,c)) = 0;
@@ -111,7 +111,7 @@ int main() {
 }
 
 //funcion dada para un numero primo
-int isPrime(int &number) {
+int isPrime(int number) {
     for (unsigned int i = 2; i < number; i++) {
         if (number % i == 0) {
             return 0;
