@@ -90,7 +90,7 @@ int main() {
 
 
 			Vec3b color = espiral.at<Vec3b>(Point(r,c));
-            a[r][c] = isPrime(a[r][c]);
+            a[r][c] = isPrime(&a[r][c]);
             //set de los colores (??)
             if(a[r][c]){
        	        espiral.at<Vec3b>(Point(r,c)) = 0;
