@@ -1,9 +1,9 @@
-TARGET= main
+TARGET= andrea
 
 all: $(TARGET)
 
 $(TARGET): $(TARGET).o
-	g++ -ggdb $(TARGET).o `pkg-config --cflags --libs opencv` -o $(TARGET)
+	g++ -ggdb $(TARGET).o `pkg-config --cflags --libs opencv` -o $(TARGET) -lpthread
 	rm $(TARGET).o
 
 $(TARGET).o:
