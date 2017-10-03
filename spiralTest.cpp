@@ -93,9 +93,9 @@ int main() {
             a[r][c] = isPrime(a[r][c]);
             //set de los colores (??)
             if(a[r][c]){
-       	        espiral.at<Vec3b>(Point(r,c)) = 255;
+       	        espiral.at<Vec3b>(Point(r,c)) = 0;
 			}else{
-		        espiral.at<Vec3b>(Point(r,c)) = 0;	
+		        espiral.at<Vec3b>(Point(r,c)) = 255;	
 			}
          //   std::cout << a[r][c] << " ";
             uchar value = (uchar) a[r][c];
@@ -111,7 +111,7 @@ int main() {
 }
 
 //funcion dada para un numero primo
-int isPrime(int number) {
+int isPrime(int &number) {
     for (unsigned int i = 2; i < number; i++) {
         if (number % i == 0) {
             return 0;
