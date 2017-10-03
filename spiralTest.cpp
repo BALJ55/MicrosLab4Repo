@@ -17,31 +17,31 @@
    * Code to generate spiral matrix for n elements where n >= 1
  
    * To generate spiral matrix for n elements just
-   * change the value of MAX to whatever u want :)
+   * change the value of MAXSZ to whatever u want :)
  
    * Author : Raza (rzs23@yahoo.com)
  
 */
 
 //Imagen a ser modificada
-Mat espiral(MAX, MAX, CV_8U);
+Mat espiral(MAXSZ, MAXSZ, CV_8U);
 //Tamano de la imagen que se creara
-complex<float> mat[MAX][MAX];
+complex<float> mat[MAXSZ][MAXSZ];
 
 
 int isPrime(int);
 
 int main() {
 
-    int initial_direction = UP, n = MAX, p = 1, num =
-            MAX * MAX + 1;    /*direccion inicial para que se mueva a la derecha*/
+    int initial_direction = UP, n = MAXSZ, p = 1, num =
+            MAXSZ * MAXSZ + 1;    /*direccion inicial para que se mueva a la derecha*/
 
-    int r, c, a[MAX][MAX];
+    int r, c, a[MAXSZ][MAXSZ];
 
     int row_right = 0, column_down = n - 1, row_left = n - 1, column_up = 0, colorVal = 0;
     //MATRIZ a 0
-    for (r = 0; r < MAX; r++) {
-        for (c = 0; c < MAX; c++)
+    for (r = 0; r < MAXSZ; r++) {
+        for (c = 0; c < MAXSZ; c++)
             a[r][c] = 0;
     }
     //Generar espiral
@@ -83,21 +83,21 @@ int main() {
     //Imprimir la Matriz
     printf("\n\n");
     int color;
-    for (r = 0; r < MAX; r++) {
-        for (c = 0; c < MAX; c++) {
+    for (r = 0; r < MAXSZ; r++) {
+        for (c = 0; c < MAXSZ; c++) {
 
             color = isPrime(a[r][c]);
             a[r][c] = color;
             std::cout << a[r][c] << " ";
             uchar value = (uchar) a[r][c];
-		    mandelbrotImg.ptr<uchar>(i)[j] = value;
+		    espiral.ptr<uchar>(r)[c] = value;
             //printf("%4d ",a[r][c]);
         }
         printf("\n");
 
 
     }
-        imwrite("espiralPrimos.png", mandelbrotImg);
+        imwrite("espiralPrimos.png", espiral);
 
     return 0;
 
