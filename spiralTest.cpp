@@ -9,7 +9,7 @@
 #define DOWN 2
 #define LEFT 3
 #define RIGHT 4
-#define MAXSZ 200
+#define MAXSZ 300
 #define NUMTHREADS 8
 
 /*
@@ -28,20 +28,12 @@ int isPrime(int);
 int a[MAXSZ][MAXSZ],z;
 
 //thread function
-void *create_image(void* numero){ 
-	std::cout<<"thread called---\n";
-    const int max = 250 * z;
-    std::cout<<"still here baby";
-    
-	std::cout<<"saliendo....\n";
-    pthread_exit((void*) 0);
-}
-
 void *printHello(void *threadid){
    long tid;
    tid = (long)threadid;
    int max = tid*250;
-	std::cout<<"saliendo....\n";
+   
+	std::cout<<"thread called....\n";
    pthread_exit((void*) 0);
 }
 
