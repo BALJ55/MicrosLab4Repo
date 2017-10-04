@@ -4,6 +4,7 @@
 #include <opencv2/core.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <iostream>
+#include <semaphore.h>
 
 #define UP 1
 #define DOWN 2
@@ -27,8 +28,11 @@ Mat espiral(MAXSZ, MAXSZ, CV_8UC1 );
 int isPrime(int);
 int a[MAXSZ][MAXSZ],t;
 
+sem_t mySemaphore;
+
 //thread function
 void *create_image(void* numero){ 
+	std::cout<<"thread called---\n";
 	/*Se declaran e inicializan las variables que se utilizaran dentro de la funcion*/
 	//max es una variable que define el numero maximo de iteraciones que pueden haber
     const int max = 125 * t;
@@ -39,11 +43,15 @@ void *create_image(void* numero){
     	for( int j=0; j<MAXSZ;j++){
     		std::cout<<a[i][j]<<" -> ";
             a[i][j] = isPrime(a[i][j]);
-            std::cout<<a[i][j]<<"\n";
+            std::cout<<a[i][j]<<" escribiendo a imagen....\n";
             uchar value = (uchar) a[i][j];
+            
+            sem_wait(&mySemaphore);
 		    espiral.ptr<uchar>(i)[j] = value;
+		    sem_post(&mySemaphore);
 		}
 	}
+	esd::cout<<"saliendo....\n";
     pthread_exit((void*) retornado);
 }
 
