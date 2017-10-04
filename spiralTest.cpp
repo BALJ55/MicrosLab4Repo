@@ -132,9 +132,4 @@ int isPrime(int number) {
     //number is prime	
     return 1;
 }
-void *create_image(void* numero){ 
-	int max_iteration = 125;
-	for(int i=0; i<=max_iteration: i++){
-		
-	}
-}
+
