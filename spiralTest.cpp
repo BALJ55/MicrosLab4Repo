@@ -4,14 +4,13 @@
 #include <opencv2/core.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <iostream>
-#include <semaphore.h>
 
 #define UP 1
 #define DOWN 2
 #define LEFT 3
 #define RIGHT 4
 #define MAXSZ 200
-#define NUMTHREADS 16
+#define NUMTHREADS 8
 
 /*
 
@@ -26,30 +25,26 @@ Mat espiral(MAXSZ, MAXSZ, CV_8UC1 );
 
 
 int isPrime(int);
-int a[MAXSZ][MAXSZ],t;
-
-sem_t mySemaphore;
+int a[MAXSZ][MAXSZ],z;
 
 //thread function
 void *create_image(void* numero){ 
 	std::cout<<"thread called---\n";
 	/*Se declaran e inicializan las variables que se utilizaran dentro de la funcion*/
 	//max es una variable que define el numero maximo de iteraciones que pueden haber
-    const int max = 125 * t;
+    const int max = 250 * z;
     int retornado;
     int iterations;
 
-    for(int i =125*(t-1); i<max;i++){
+    for(int i =250*(z-1); i<max;i++){
     	for( int j=0; j<MAXSZ;j++){
-    		std::cout<<a[i][j]<<" -> ";
             a[i][j] = isPrime(a[i][j]);
-            std::cout<<a[i][j]<<" escribiendo a imagen....\n";
             uchar value = (uchar) a[i][j];
             
-            sem_wait(&mySemaphore);
-		    espiral.ptr<uchar>(i)[j] = value;
-		    sem_post(&mySemaphore);
+    		std::cout<<a[i][j]<<" -> imagen\n";
+            espiral.ptr<uchar>(i)[j] = value;
 		}
+		std::cout<<"loop2";
 	}
 	esd::cout<<"saliendo....\n";
     pthread_exit((void*) retornado);
@@ -109,7 +104,8 @@ int main() {
     
     pthread_t threads[NUMTHREADS];
     //Se define la variable que contendra el valor que retorne el thread
-    void* return_status;  
+    void* return_status; 
+	int t; 
     for (t = 0; t <= NUMTHREADS; t++){
         pthread_create(&threads[t], NULL, create_image, (void *) t);
     }
