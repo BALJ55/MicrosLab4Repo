@@ -41,17 +41,14 @@ void *printHello(void *threadid){
    long tid;
    tid = (long)threadid;
    int max = tid*250;
-   std::cout<<"Hello World! It's me, thread "<<tid<<std::endl;
-	
-//	for( int i=250*(tid-1); i<max ; i++ ){
-//    	for( int j=0; j<MAXSZ;j++){
-//            a[i][j] = isPrime(a[i][j]);
-//            uchar value = (uchar) a[i][j];
-//    		std::cout<<a[i][j]<<" -> imagen\n";
-////            espiral.ptr<uchar>(i)[j] = value;
-//		}
-//		std::cout<<"loop2";
-//	}
+	//thread ejecuta 250 columnas de la imagen
+	for( int i=250*(tid-1); i<max ; i++ ){
+    	for( int j=0; j<MAXSZ;j++){
+            a[i][j] = isPrime(a[i][j]);
+            uchar value = (uchar) a[i][j];
+    		std::cout<<a[i][j]<<" -> imagen\n";
+		}
+	}
 	std::cout<<"saliendo....\n";
    pthread_exit((void*) 0);
 }
@@ -109,6 +106,14 @@ int main() {
     //Imprimir la Matriz
     printf("\n\n");
     
+    for (r = 0; r < MAXSZ; r++) {
+        for (c = 0; c < MAXSZ; c++) {
+            a[r][c] = isPrime(a[r][c]);
+            std::cout<<"writing :"<<a[r][c]<<"\n";
+            uchar value = (uchar) a[r][c];
+		    espiral.ptr<uchar>(r)[c] = value;
+        }
+    }   	
     pthread_t threads[NUMTHREADS];
     //Se define la variable que contendra el valor que retorne el thread
     void* return_status; 
@@ -119,20 +124,7 @@ int main() {
     for (t = 0; t <= NUMTHREADS; t++){
         pthread_join(threads[t], &return_status);
     }
-//		----- VERSIÓN SERIAL -----
-//    
-//    for (r = 0; r < MAXSZ; r++) {
-//        for (c = 0; c < MAXSZ; c++) {
-//
-//
-//			std::cout<<a[r][c]<<" -> ";
-//            a[r][c] = isPrime(a[r][c]);
-//            std::cout<<a[r][c]<<"\n";
-//            uchar value = (uchar) a[r][c];
-//		    espiral.ptr<uchar>(r)[c] = value;
-//        }
-//    }   	
-//		----- ! VERSIÓN SERIAL -----
+    
         imwrite("espiralPrimos.png", espiral);
 std::cout<<"Imagen guardada con exito";
     return 0;
