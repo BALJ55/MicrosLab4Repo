@@ -98,7 +98,7 @@ int main() {
     for (t = 1; t <= NUMTHREADS+1; t++){
         pthread_create(&threads[t], NULL, threadFunction, (void *) t);
     }
-    std::cout<<"building image...\n;"
+    std::cout<<"building image...\n";
     for (r = 0; r < MAXSZ; r++) {
         for (c = 0; c < MAXSZ; c++) {
             a[r][c] = isPrime(a[r][c]);
