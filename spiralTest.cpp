@@ -26,7 +26,7 @@
 using namespace cv;
 
 //Imagen a ser modificada
-Mat espiral(MAXSZ, MAXSZ, CV_32U);
+Mat espiral(MAXSZ, MAXSZ, CV_32SC1);
 //Tamano de la imagen que se creara
 //float mat[MAXSZ][MAXSZ];
 
