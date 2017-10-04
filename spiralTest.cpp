@@ -44,10 +44,8 @@ void *printHello(void *threadid){
 	//thread ejecuta 250 columnas de la imagen
 	for( int i=250*(tid-1); i<max ; i++ ){
     	for( int j=0; j<MAXSZ;j++){
-            a[i][j] = isPrime(a[i][j]);
-            uchar value = (uchar) a[i][j];
-    		std::cout<<a[i][j]<<" -> imagen\n";
-		}
+    		std::cout<<"probando para: "<<a[i][j]<<std::endl;
+        }
 	}
 	std::cout<<"saliendo....\n";
    pthread_exit((void*) 0);
