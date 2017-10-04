@@ -30,12 +30,8 @@ int a[MAXSZ][MAXSZ],z;
 //thread function
 void *create_image(void* numero){ 
 	std::cout<<"thread called---\n";
-	/*Se declaran e inicializan las variables que se utilizaran dentro de la funcion*/
-	//max es una variable que define el numero maximo de iteraciones que pueden haber
     const int max = 250 * z;
-    int retornado;
-    int iterations;
-
+    std::cout<<"still here baby";
     for(int i =250*(z-1); i<max;i++){
     	for( int j=0; j<MAXSZ;j++){
             a[i][j] = isPrime(a[i][j]);
@@ -46,7 +42,7 @@ void *create_image(void* numero){
 		}
 		std::cout<<"loop2";
 	}
-	esd::cout<<"saliendo....\n";
+	std::cout<<"saliendo....\n";
     pthread_exit((void*) retornado);
 }
 
