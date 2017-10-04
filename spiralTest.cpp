@@ -25,7 +25,27 @@ Mat espiral(MAXSZ, MAXSZ, CV_8UC1 );
 
 
 int isPrime(int);
-int a[MAXSZ][MAXSZ];
+int a[MAXSZ][MAXSZ],t;
+
+//thread function
+void *create_image(void* numero){ 
+	/*Se declaran e inicializan las variables que se utilizaran dentro de la funcion*/
+	//max es una variable que define el numero maximo de iteraciones que pueden haber
+    const int max = 125 * t;
+    int retornado;
+    int iterations;
+
+    for(int i =125*(t-1); i<max;i++){
+    	for( int j=0; j<MAXSZ;j++){
+    		std::cout<<a[i][j]<<" -> ";
+            a[i][j] = isPrime(a[i][j]);
+            std::cout<<a[i][j]<<"\n";
+            uchar value = (uchar) a[i][j];
+		    espiral.ptr<uchar>(i)[j] = value;
+		}
+	}
+    pthread_exit((void*) retornado);
+}
 
 int main() {
 
@@ -81,8 +101,7 @@ int main() {
     
     pthread_t threads[NUMTHREADS];
     //Se define la variable que contendra el valor que retorne el thread
-    void* return_status;
-    int t;    
+    void* return_status;  
     for (t = 0; t <= NUMTHREADS; t++){
         pthread_create(&threads[t], NULL, create_image, (void *) t);
     }
@@ -120,23 +139,4 @@ int isPrime(int number) {
     return 255;
 }
 
-//thread function
-void *create_image(void* numero){ 
-	/*Se declaran e inicializan las variables que se utilizaran dentro de la funcion*/
-	//max es una variable que define el numero maximo de iteraciones que pueden haber
-    const int max = 125 * numero;
-    int retornado;
-    int iterations;
 
-    for(int i =125*(numero-1); i<max;i++){
-    	for( int j=0; j<MAXSZ;j++){
-    		std::cout<<a[i][j]<<" -> ";
-            a[i][j] = isPrime(a[i][j]);
-            std::cout<<a[i][j]<<"\n";
-            uchar value = (uchar) a[i][j];
-		    espiral.ptr<uchar>(i)[j] = value;
-		}
-	}
-    pthread_exit((void*) retornado);
-
-}
