@@ -46,6 +46,15 @@ void *create_image(void* numero){
     pthread_exit((void*) retornado);
 }
 
+void *printHello(void *threadid){
+   long tid;
+   tid = (long)threadid;
+   cout<<"Hello World! It's me, thread "<<tid<<endl;
+
+   pthread_exit((void*) 0);
+}
+
+
 int main() {
 
     int initial_direction = UP, n = MAXSZ, p = 1, num =
@@ -103,7 +112,7 @@ int main() {
     void* return_status; 
 	int t; 
     for (t = 0; t <= NUMTHREADS; t++){
-        pthread_create(&threads[t], NULL, create_image, (void *) t);
+        pthread_create(&threads[t], NULL, printHello, (void *) t);
     }
     for (t = 0; t <= NUMTHREADS; t++){
         pthread_join(threads[t], &return_status);
