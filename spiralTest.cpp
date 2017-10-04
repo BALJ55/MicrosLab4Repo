@@ -79,14 +79,14 @@ int main() {
     //Imprimir la Matriz
     printf("\n\n");
     
-    pthread_t threads[NUM_THREADS];
+    pthread_t threads[NUMTHREADS];
     //Se define la variable que contendra el valor que retorne el thread
     void* return_status;
-    
+    int t;    
     for (t = 0; t <= NUMTHREADS; t++){
-        pthread_create(&threads[t], NULL, build_image, (void *) t);
+        pthread_create(&threads[t], NULL, create_image, (void *) t);
     }
-    for (t = 0; t <= NUM_THREADS; t++){
+    for (t = 0; t <= NUMTHREADS; t++){
         pthread_join(threads[t], &return_status);
     }
 //		----- VERSIÓN SERIAL -----
