@@ -41,12 +41,6 @@ void *printHello(void *threadid){
    long tid;
    tid = (long)threadid;
    int max = tid*250;
-	//thread ejecuta 250 columnas de la imagen
-	for( int i=250*(tid-1); i<max ; i++ ){
-    	for( int j=0; j<MAXSZ;j++){
-    		std::cout<<"probando para: "<<a[i][j]<<std::endl;
-        }
-	}
 	std::cout<<"saliendo....\n";
    pthread_exit((void*) 0);
 }
