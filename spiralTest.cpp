@@ -9,8 +9,8 @@
 #define DOWN 2
 #define LEFT 3
 #define RIGHT 4
-#define MAXSZ 20
-#define NUMTHREADS 16
+#define MAXSZ 200
+#define NUMTHREADS 20
 
 /*
  
@@ -95,7 +95,7 @@ int main() {
             std::cout<<a[r][c]<<"\n";
             uchar value = (uchar) a[r][c];
 		    espiral.ptr<uchar>(r)[c] = value;
-		    espiral.at<uchar>(r)[c] = value;
+		   // espiral.at<uchar>(r)[c] = value;
         }
     }   	
         imwrite("espiralPrimos.png", espiral);
