@@ -103,12 +103,14 @@ int main() {
 //            std::cout<<a[r][c]<<"\n";
             //set de los colores (??)
             if(a[r][c]){
-       	        espiral.at<Vec3b>(Point(r,c)) = 255;
+//       	        espiral.at<Vec3b>(Point(r,c)) = 255;
+       	        uchar value = (uchar) 255;
 			}else{
-		        espiral.at<Vec3b>(Point(r,c)) =0;	
+//		        espiral.at<Vec3b>(Point(r,c)) =0;	
+		        uchar value = (uchar) 0;
 			}
            std::cout << a[r][c] << " ";
-            //uchar value = (uchar) a[r][c];
+            
 		    espiral.ptr<uchar>(r)[c] = value;
             //printf("%4d ",a[r][c]);
         }
