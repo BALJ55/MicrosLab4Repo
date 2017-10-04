@@ -92,13 +92,7 @@ int main() {
     //Se define la variable que contendra el valor que retorne el thread
     void* return_status;
     
-    for (t = 0; t <= NUM_THREADS; t++){
-            pthread_create(&threads[t], NULL, create_image, (void *) t);
-        }
-        //Se espera a que cada thread termine de ejecutarse
-        for (t = 0; t <= NUM_THREADS; t++){
-            pthread_join(threads[t], &return_status);
-        }
+    
     for (r = 0; r < MAXSZ; r++) {
         for (c = 0; c < MAXSZ; c++) {
 
