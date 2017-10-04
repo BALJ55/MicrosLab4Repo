@@ -9,7 +9,7 @@
 #define DOWN 2
 #define LEFT 3
 #define RIGHT 4
-#define MAXSZ 200
+#define MAXSZ 20
 
 
 /*
@@ -90,8 +90,9 @@ int main() {
 
 
 			Vec3b color = espiral.at<Vec3b>(Point(r,c));
-		std::cout<<a[r][c]<<"-> ";
+			std::cout<<a[r][c]<<" -> ";
             a[r][c] = isPrime(a[r][c]);
+            std::cout<<a[r][c]<<"\n";
             //set de los colores (??)
             if(a[r][c]){
        	        espiral.at<Vec3b>(Point(r,c)) = 0;
