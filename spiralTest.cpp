@@ -9,7 +9,8 @@
 #define DOWN 2
 #define LEFT 3
 #define RIGHT 4
-#define MAXSZ 200
+#define MAXSZ 2000
+#define THREADS 16
 
 
 /*
@@ -85,23 +86,26 @@ int main() {
     //Imprimir la Matriz
     printf("\n\n");
     int color;
+    
+    for (t = 0; t <= NUM_THREADS; t++){
+            pthread_create(&threads[t], NULL, create_image, (void *) t);
+        }
+        //Se espera a que cada thread termine de ejecutarse
+        for (t = 0; t <= NUM_THREADS; t++){
+            pthread_join(threads[t], &return_status);
+        }
     for (r = 0; r < MAXSZ; r++) {
         for (c = 0; c < MAXSZ; c++) {
 
 
 			Vec3b color = espiral.at<Vec3b>(Point(r,c));
-//			std::cout<<a[r][c]<<" -> ";
             a[r][c] = isPrime(a[r][c]);
-//            std::cout<<a[r][c]<<"\n";
-            //set de los colores (??)
             if(a[r][c]){
-       	        espiral.at<Vec3b>(Point(r,c)) = 255;
+		    	espiral.ptr<uchar>(r)[c] = 255;
 			}else{
-		        espiral.at<Vec3b>(Point(r,c)) =0;	
+		    	espiral.ptr<uchar>(r)[c] = 0;	
 			}
-           std::cout << a[r][c] << " ";
-            uchar value = (uchar) a[r][c];
-		    espiral.ptr<uchar>(r)[c] = value;
+//            uchar value = (uchar) a[r][c];
             //printf("%4d ",a[r][c]);
         }
 std::cout<<"\n";
