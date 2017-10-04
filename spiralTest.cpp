@@ -87,6 +87,11 @@ int main() {
     printf("\n\n");
     int color;
     
+    //Se incializa el thread como un array de la cantidad que especifica NUM_THREADS
+    pthread_t threads[MAXSZ];
+    //Se define la variable que contendra el valor que retorne el thread
+    void* return_status;
+    
     for (t = 0; t <= NUM_THREADS; t++){
             pthread_create(&threads[t], NULL, create_image, (void *) t);
         }
@@ -99,13 +104,18 @@ int main() {
 
 
 			Vec3b color = espiral.at<Vec3b>(Point(r,c));
+//			std::cout<<a[r][c]<<" -> ";
             a[r][c] = isPrime(a[r][c]);
+//            std::cout<<a[r][c]<<"\n";
+            //set de los colores (??)
             if(a[r][c]){
-		    	espiral.ptr<uchar>(r)[c] = 255;
+       	        espiral.at<Vec3b>(Point(r,c)) = 255;
 			}else{
-		    	espiral.ptr<uchar>(r)[c] = 0;	
+		        espiral.at<Vec3b>(Point(r,c)) =0;	
 			}
-//            uchar value = (uchar) a[r][c];
+           std::cout << a[r][c] << " ";
+            //uchar value = (uchar) a[r][c];
+		    espiral.ptr<uchar>(r)[c] = value;
             //printf("%4d ",a[r][c]);
         }
 std::cout<<"\n";
@@ -126,4 +136,9 @@ int isPrime(int number) {
     //number is prime	
     return 1;
 }
-
+void *create_image(void* numero){ 
+	int max_iteration = 125;
+	for(int i=0; i<=max_iteration: i++){
+		
+	}
+}
