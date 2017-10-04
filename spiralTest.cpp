@@ -40,16 +40,17 @@ void *create_image(void* numero){
 void *printHello(void *threadid){
    long tid;
    tid = (long)threadid;
+   max = tid*250;
    std::cout<<"Hello World! It's me, thread "<<tid<<std::endl;
 	
-	for(int i =250*(z-1); i<tid*250;i++){
-//    	for( int j=0; j<MAXSZ;j++){
-//            a[i][j] = isPrime(a[i][j]);
-//            uchar value = (uchar) a[i][j];
-//    		std::cout<<a[i][j]<<" -> imagen\n";
+	for( int i=250*(tid-1); i<max ; i++ ){
+    	for( int j=0; j<MAXSZ;j++){
+            a[i][j] = isPrime(a[i][j]);
+            uchar value = (uchar) a[i][j];
+    		std::cout<<a[i][j]<<" -> imagen\n";
 //            espiral.ptr<uchar>(i)[j] = value;
-//		}
-		std::cout<<"loop2";
+		}
+//		std::cout<<"loop2";
 	}
 	std::cout<<"saliendo....\n";
    pthread_exit((void*) 0);
