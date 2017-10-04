@@ -10,7 +10,7 @@
 #define LEFT 3
 #define RIGHT 4
 #define MAXSZ 20
-
+#define NUMTHREADS 16
 
 /*
  
@@ -32,13 +32,14 @@ Mat espiral(MAXSZ, MAXSZ, CV_32SC1);
 
 
 int isPrime(int);
+int a[MAXSZ][MAXSZ];
 
 int main() {
 
     int initial_direction = UP, n = MAXSZ, p = 1, num =
             MAXSZ * MAXSZ + 1;    /*direccion inicial para que se mueva a la derecha*/
 
-    int r, c, a[MAXSZ][MAXSZ];
+    int r, c ;
 
     int row_right = 0, column_down = n - 1, row_left = n - 1, column_up = 0, colorVal = 0;
     //MATRIZ a 0
@@ -89,16 +90,16 @@ int main() {
         for (c = 0; c < MAXSZ; c++) {
 
 
-			Vec3b color = espiral.at<Vec3b>(Point(r,c));
+//			Vec3b color = espiral.at<Vec3b>(Point(r,c));
 			std::cout<<a[r][c]<<" -> ";
             a[r][c] = isPrime(a[r][c]);
             std::cout<<a[r][c]<<"\n";
             //set de los colores (??)
-            if(a[r][c]){
-       	        espiral.at<Vec3b>(Point(r,c)) = 0;
-			}else{
-		        espiral.at<Vec3b>(Point(r,c)) =255;	
-			}
+//            if(a[r][c]){
+//       	        espiral.at<Vec3b>(Point(r,c)) = Vec3b(0, 0, 0);
+//			}else{
+//		        espiral.at<Vec3b>(Point(r,c)) =Vec3b(255, 255, 255);	
+//			}
          //   std::cout << a[r][c] << " ";
             uchar value = (uchar) a[r][c];
 		    espiral.ptr<uchar>(r)[c] = value;
