@@ -9,8 +9,7 @@
 #define DOWN 2
 #define LEFT 3
 #define RIGHT 4
-#define MAXSZ 2000
-#define THREADS 16
+#define MAXSZ 20
 
 
 /*
@@ -27,7 +26,7 @@
 using namespace cv;
 
 //Imagen a ser modificada
-Mat espiral(MAXSZ, MAXSZ, CV_32SC1);
+Mat espiral(MAXSZ, MAXSZ, CV_32U);
 //Tamano de la imagen que se creara
 //float mat[MAXSZ][MAXSZ];
 
@@ -86,33 +85,25 @@ int main() {
     //Imprimir la Matriz
     printf("\n\n");
     int color;
-    
-    //Se incializa el thread como un array de la cantidad que especifica NUM_THREADS
-    pthread_t threads[MAXSZ];
-    //Se define la variable que contendra el valor que retorne el thread
-    void* return_status;
-    
-    
     for (r = 0; r < MAXSZ; r++) {
         for (c = 0; c < MAXSZ; c++) {
 
 
 			Vec3b color = espiral.at<Vec3b>(Point(r,c));
-//			std::cout<<a[r][c]<<" -> ";
+			std::cout<<a[r][c]<<" -> ";
             a[r][c] = isPrime(a[r][c]);
-//            std::cout<<a[r][c]<<"\n";
+            std::cout<<a[r][c]<<"\n";
             //set de los colores (??)
             if(a[r][c]){
-       	        espiral.at<Vec3b>(Point(r,c)) = 255;
+       	        espiral.at<Vec3b>(Point(r,c)) = 0;
 			}else{
-		        espiral.at<Vec3b>(Point(r,c)) =0;	
+		        espiral.at<Vec3b>(Point(r,c)) =255;	
 			}
-           std::cout << a[r][c] << " ";
+         //   std::cout << a[r][c] << " ";
             uchar value = (uchar) a[r][c];
 		    espiral.ptr<uchar>(r)[c] = value;
             //printf("%4d ",a[r][c]);
         }
-std::cout<<"\n";
     }   	
         imwrite("espiralPrimos.png", espiral);
 std::cout<<"Imagen guardada con exito";
