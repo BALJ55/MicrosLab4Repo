@@ -40,7 +40,7 @@ void *create_image(void* numero){
 void *printHello(void *threadid){
    long tid;
    tid = (long)threadid;
-   max = tid*250;
+   int max = tid*250;
    std::cout<<"Hello World! It's me, thread "<<tid<<std::endl;
 	
 	for( int i=250*(tid-1); i<max ; i++ ){
