@@ -90,7 +90,7 @@ int main() {
 
 
 			Vec3b color = espiral.at<Vec3b>(Point(r,c));
-		std::cout<<"calculando valor para: "<<a[r][c]<<"\n";
+		std::cout<<a[r][c]<<"-> ";
             a[r][c] = isPrime(a[r][c]);
             //set de los colores (??)
             if(a[r][c]){
@@ -103,10 +103,9 @@ int main() {
 		    espiral.ptr<uchar>(r)[c] = value;
             //printf("%4d ",a[r][c]);
         }
-    }
-std::cout<<"tuto bein";    	
+    }   	
         imwrite("espiralPrimos.png", espiral);
-std::cout<<"wtf tho?";
+std::cout<<"Imagen guardada con exito";
     return 0;
 
 }
