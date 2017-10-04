@@ -35,8 +35,7 @@ void *threadFunction(void *threadid){
    tid = (long)threadid;
    int max = tid*250;
    for (int i=250*(tid-1); i<max;i++){
-   	std::cout<<"trabajando fila: "<<i<<std::endl;
-   	isPrime(i);
+	isPrime(i);
    }
    pthread_exit((void*) 0);
 }
@@ -96,7 +95,7 @@ int main() {
     void* return_status; 
 	int t; 
     
-    for (t = 0; t <= NUMTHREADS; t++){
+    for (t = 1; t <= NUMTHREADS+1; t++){
         pthread_create(&threads[t], NULL, threadFunction, (void *) t);
     }
     for (r = 0; r < MAXSZ; r++) {
@@ -106,10 +105,10 @@ int main() {
 		    espiral.ptr<uchar>(r)[c] = value;
         }
     }   	
-    
     for (t = 0; t <= NUMTHREADS; t++){
         pthread_join(threads[t], &return_status);
     }
+    std::cout<<"--threads ended--";
     
         imwrite("espiralPrimos.png", espiral);
 std::cout<<"Imagen guardada con exito como espiralPrimos.png";
