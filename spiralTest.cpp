@@ -9,7 +9,7 @@
 #define DOWN 2
 #define LEFT 3
 #define RIGHT 4
-#define MAXSZ 300
+#define MAXSZ 400
 #define NUMTHREADS 8
 
 /*
@@ -98,6 +98,7 @@ int main() {
     for (t = 1; t <= NUMTHREADS+1; t++){
         pthread_create(&threads[t], NULL, threadFunction, (void *) t);
     }
+    std::cout<<"building image...\n;"
     for (r = 0; r < MAXSZ; r++) {
         for (c = 0; c < MAXSZ; c++) {
             a[r][c] = isPrime(a[r][c]);
@@ -105,10 +106,11 @@ int main() {
 		    espiral.ptr<uchar>(r)[c] = value;
         }
     }   	
+    std::cout<<"ending theads...\n";
     for (t = 0; t <= NUMTHREADS; t++){
         pthread_join(threads[t], &return_status);
     }
-    std::cout<<"--threads ended--";
+    std::cout<<"-- threads ended --";
     
         imwrite("espiralPrimos.png", espiral);
 std::cout<<"Imagen guardada con exito como espiralPrimos.png";
