@@ -9,7 +9,7 @@
 #define DOWN 2
 #define LEFT 3
 #define RIGHT 4
-#define MAXSZ 800
+#define MAXSZ 200
 
 
 /*
@@ -26,7 +26,7 @@
 using namespace cv;
 
 //Imagen a ser modificada
-Mat espiral(MAXSZ, MAXSZ, CV_8UC4);
+Mat espiral(MAXSZ, MAXSZ, CV_32U);
 //Tamano de la imagen que se creara
 //float mat[MAXSZ][MAXSZ];
 
