@@ -34,7 +34,7 @@ void *create_image(void* numero){
     std::cout<<"still here baby";
     
 	std::cout<<"saliendo....\n";
-    pthread_exit((void*) retornado);
+    pthread_exit((void*) 0);
 }
 
 void *printHello(void *threadid){
@@ -43,12 +43,12 @@ void *printHello(void *threadid){
    std::cout<<"Hello World! It's me, thread "<<tid<<std::endl;
 	
 	for(int i =250*(z-1); i<tid*250;i++){
-    	for( int j=0; j<MAXSZ;j++){
-            a[i][j] = isPrime(a[i][j]);
-            uchar value = (uchar) a[i][j];
-    		std::cout<<a[i][j]<<" -> imagen\n";
-            espiral.ptr<uchar>(i)[j] = value;
-		}
+//    	for( int j=0; j<MAXSZ;j++){
+//            a[i][j] = isPrime(a[i][j]);
+//            uchar value = (uchar) a[i][j];
+//    		std::cout<<a[i][j]<<" -> imagen\n";
+//            espiral.ptr<uchar>(i)[j] = value;
+//		}
 		std::cout<<"loop2";
 	}
 	std::cout<<"saliendo....\n";
