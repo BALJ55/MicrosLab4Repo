@@ -28,21 +28,24 @@ int isPrime(int);
 int a[MAXSZ][MAXSZ],z;
 
 //thread function
-void *printHello(void *threadid){
+void *threadFunction(void *threadid){
+	
+   std::cout<<"thread called\n";
    long tid;
    tid = (long)threadid;
    int max = tid*250;
-   
-	std::cout<<"thread called....\n";
+   for (int i=250*(tid-1); i<max;i++){
+   	std::cout<<"trabajando fila: "<<i<<std::endl;
+   	isPrime(i);
+   }
    pthread_exit((void*) 0);
 }
 
 
 int main() {
-
-    int initial_direction = UP, n = MAXSZ, p = 1, num =
-            MAXSZ * MAXSZ + 1;    /*direccion inicial para que se mueva a la derecha*/
-
+	//direccion inicial para que se mueva a la derecha
+    int initial_direction = UP, n = MAXSZ, p = 1, num = MAXSZ * MAXSZ + 1;    
+	//rows y cols
     int r, c ;
 
     int row_right = 0, column_down = n - 1, row_left = n - 1, column_up = 0, colorVal = 0;
@@ -87,30 +90,29 @@ int main() {
             initial_direction = UP;
         }
     }
-    //Imprimir la Matriz
-    printf("\n\n");
-    
-    for (r = 0; r < MAXSZ; r++) {
-        for (c = 0; c < MAXSZ; c++) {
-            a[r][c] = isPrime(a[r][c]);
-            std::cout<<"writing :"<<a[r][c]<<"\n";
-            uchar value = (uchar) a[r][c];
-		    espiral.ptr<uchar>(r)[c] = value;
-        }
-    }   	
+    //creacion de threads
     pthread_t threads[NUMTHREADS];
     //Se define la variable que contendra el valor que retorne el thread
     void* return_status; 
 	int t; 
+    
     for (t = 0; t <= NUMTHREADS; t++){
-        pthread_create(&threads[t], NULL, printHello, (void *) t);
+        pthread_create(&threads[t], NULL, threadFunction, (void *) t);
     }
+    for (r = 0; r < MAXSZ; r++) {
+        for (c = 0; c < MAXSZ; c++) {
+            a[r][c] = isPrime(a[r][c]);
+            uchar value = (uchar) a[r][c];
+		    espiral.ptr<uchar>(r)[c] = value;
+        }
+    }   	
+    
     for (t = 0; t <= NUMTHREADS; t++){
         pthread_join(threads[t], &return_status);
     }
     
         imwrite("espiralPrimos.png", espiral);
-std::cout<<"Imagen guardada con exito";
+std::cout<<"Imagen guardada con exito como espiralPrimos.png";
     return 0;
 
 }
