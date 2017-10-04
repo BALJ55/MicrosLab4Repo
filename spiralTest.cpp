@@ -9,7 +9,7 @@
 #define DOWN 2
 #define LEFT 3
 #define RIGHT 4
-#define MAXSZ 20
+#define MAXSZ 200
 
 
 /*
@@ -26,7 +26,7 @@
 using namespace cv;
 
 //Imagen a ser modificada
-Mat espiral(MAXSZ, MAXSZ, CV_32U);
+Mat espiral(MAXSZ, MAXSZ, CV_32SC1);
 //Tamano de la imagen que se creara
 //float mat[MAXSZ][MAXSZ];
 
@@ -90,20 +90,21 @@ int main() {
 
 
 			Vec3b color = espiral.at<Vec3b>(Point(r,c));
-			std::cout<<a[r][c]<<" -> ";
+//			std::cout<<a[r][c]<<" -> ";
             a[r][c] = isPrime(a[r][c]);
-            std::cout<<a[r][c]<<"\n";
+//            std::cout<<a[r][c]<<"\n";
             //set de los colores (??)
             if(a[r][c]){
-       	        espiral.at<Vec3b>(Point(r,c)) = 0;
+       	        espiral.at<Vec3b>(Point(r,c)) = 255;
 			}else{
-		        espiral.at<Vec3b>(Point(r,c)) =255;	
+		        espiral.at<Vec3b>(Point(r,c)) =0;	
 			}
-         //   std::cout << a[r][c] << " ";
+           std::cout << a[r][c] << " ";
             uchar value = (uchar) a[r][c];
 		    espiral.ptr<uchar>(r)[c] = value;
             //printf("%4d ",a[r][c]);
         }
+std::cout<<"\n";
     }   	
         imwrite("espiralPrimos.png", espiral);
 std::cout<<"Imagen guardada con exito";
