@@ -43,13 +43,13 @@ void *printHello(void *threadid){
    int max = tid*250;
    std::cout<<"Hello World! It's me, thread "<<tid<<std::endl;
 	
-	for( int i=250*(tid-1); i<max ; i++ ){
-    	for( int j=0; j<MAXSZ;j++){
-            a[i][j] = isPrime(a[i][j]);
-            uchar value = (uchar) a[i][j];
-    		std::cout<<a[i][j]<<" -> imagen\n";
-//            espiral.ptr<uchar>(i)[j] = value;
-		}
+//	for( int i=250*(tid-1); i<max ; i++ ){
+//    	for( int j=0; j<MAXSZ;j++){
+//            a[i][j] = isPrime(a[i][j]);
+//            uchar value = (uchar) a[i][j];
+//    		std::cout<<a[i][j]<<" -> imagen\n";
+////            espiral.ptr<uchar>(i)[j] = value;
+//		}
 //		std::cout<<"loop2";
 	}
 	std::cout<<"saliendo....\n";
