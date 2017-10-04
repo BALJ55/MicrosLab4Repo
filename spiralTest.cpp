@@ -10,17 +10,10 @@
 #define LEFT 3
 #define RIGHT 4
 #define MAXSZ 200
-#define NUMTHREADS 20
+#define NUMTHREADS 16
 
 /*
- 
-   * Code to generate spiral matrix for n elements where n >= 1
- 
-   * To generate spiral matrix for n elements just
-   * change the value of MAXSZ to whatever u want :)
- 
-   * Author : Raza (rzs23@yahoo.com)
- 
+
 */
 
 using namespace cv;
@@ -85,19 +78,31 @@ int main() {
     }
     //Imprimir la Matriz
     printf("\n\n");
-    int color;
-    for (r = 0; r < MAXSZ; r++) {
-        for (c = 0; c < MAXSZ; c++) {
-
-
-			std::cout<<a[r][c]<<" -> ";
-            a[r][c] = isPrime(a[r][c]);
-            std::cout<<a[r][c]<<"\n";
-            uchar value = (uchar) a[r][c];
-		    espiral.ptr<uchar>(r)[c] = value;
-		   // espiral.at<uchar>(r)[c] = value;
-        }
-    }   	
+    
+    pthread_t threads[NUM_THREADS];
+    //Se define la variable que contendra el valor que retorne el thread
+    void* return_status;
+    
+    for (t = 0; t <= NUMTHREADS; t++){
+        pthread_create(&threads[t], NULL, build_image, (void *) t);
+    }
+    for (t = 0; t <= NUM_THREADS; t++){
+        pthread_join(threads[t], &return_status);
+    }
+//		----- VERSIÓN SERIAL -----
+//    
+//    for (r = 0; r < MAXSZ; r++) {
+//        for (c = 0; c < MAXSZ; c++) {
+//
+//
+//			std::cout<<a[r][c]<<" -> ";
+//            a[r][c] = isPrime(a[r][c]);
+//            std::cout<<a[r][c]<<"\n";
+//            uchar value = (uchar) a[r][c];
+//		    espiral.ptr<uchar>(r)[c] = value;
+//        }
+//    }   	
+//		----- ! VERSIÓN SERIAL -----
         imwrite("espiralPrimos.png", espiral);
 std::cout<<"Imagen guardada con exito";
     return 0;
@@ -115,3 +120,23 @@ int isPrime(int number) {
     return 255;
 }
 
+//thread function
+void *create_image(void* numero){ 
+	/*Se declaran e inicializan las variables que se utilizaran dentro de la funcion*/
+	//max es una variable que define el numero maximo de iteraciones que pueden haber
+    const int max = 125 * numero;
+    int retornado;
+    int iterations;
+
+    for(int i =125*(numero-1); i<max;i++){
+    	for( int j=0; j<MAXSZ;j++){
+    		std::cout<<a[i][j]<<" -> ";
+            a[i][j] = isPrime(a[i][j]);
+            std::cout<<a[i][j]<<"\n";
+            uchar value = (uchar) a[i][j];
+		    espiral.ptr<uchar>(i)[j] = value;
+		}
+	}
+    pthread_exit((void*) retornado);
+
+}
