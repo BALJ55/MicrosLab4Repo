@@ -26,7 +26,7 @@
 using namespace cv;
 
 //Imagen a ser modificada
-Mat espiral(MAXSZ, MAXSZ, CV_32SC1);
+Mat espiral(MAXSZ, MAXSZ, CV_8UC1 );
 //Tamano de la imagen que se creara
 //float mat[MAXSZ][MAXSZ];
 
@@ -90,20 +90,12 @@ int main() {
         for (c = 0; c < MAXSZ; c++) {
 
 
-//			Vec3b color = espiral.at<Vec3b>(Point(r,c));
 			std::cout<<a[r][c]<<" -> ";
             a[r][c] = isPrime(a[r][c]);
             std::cout<<a[r][c]<<"\n";
-            //set de los colores (??)
-//            if(a[r][c]){
-//       	        espiral.at<Vec3b>(Point(r,c)) = Vec3b(0, 0, 0);
-//			}else{
-//		        espiral.at<Vec3b>(Point(r,c)) =Vec3b(255, 255, 255);	
-//			}
-         //   std::cout << a[r][c] << " ";
             uchar value = (uchar) a[r][c];
 		    espiral.ptr<uchar>(r)[c] = value;
-            //printf("%4d ",a[r][c]);
+		    espiral.at<uchar>(r)[c] = value;
         }
     }   	
         imwrite("espiralPrimos.png", espiral);
@@ -120,6 +112,6 @@ int isPrime(int number) {
         }
     }
     //number is prime	
-    return 1;
+    return 255;
 }
 
