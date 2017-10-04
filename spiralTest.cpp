@@ -51,7 +51,7 @@ void *printHello(void *threadid){
 ////            espiral.ptr<uchar>(i)[j] = value;
 //		}
 //		std::cout<<"loop2";
-	}
+//	}
 	std::cout<<"saliendo....\n";
    pthread_exit((void*) 0);
 }
